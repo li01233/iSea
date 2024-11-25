@@ -1,77 +1,44 @@
-# PyDracula - Modern GUI PySide6 / PyQt6
-# 
+# iSea 数字孪生船岸镜像智能感知系统
 
-> ## :gift: **//// DONATE ////**
-> ## 🔗 Donate (Gumroad): https://gum.co/mHsRC
-> This interface is free for any use, but if you are going to use it commercially, consider helping to maintain this project and others with a donation by Gumroado at the link above. This helps to keep this and other projects active.
+## 背景意义
 
-> **Warning**: this project was created using PySide6 and Python 3.9, using previous versions can cause compatibility problems.
+![image](readme/1.jpg)
 
-# YouTube - Presentation And Tutorial
-Presentation and tutorial video with the main functions of the user interface.
-> 🔗 https://youtu.be/9DnaHg4M_AM
+海豚1——数字孪生船岸镜像智能感知系统iSea的提出对于提高海上交通管理效率，保障船舶海上航行安全有着重要的作用。本项目可以应用于以下场景：
+1. 港口航行：在港口进出时，船舶需要高精度导航，海豚1——数字孪生船岸镜像智能感知系统的去雾系统和船岸分割技术通过对于回采的感知数据进行预处理和分析，提供预警播报信息，可大幅提高航行安全性；并且通过船舶目标检测可以协助对其进行航向轨迹分析、流量统计等，实现对海上交通监控平台和港口管理系统的辅助，有助于提升港口利用效率和管理效率。
+2. 狭窄水域航行：在狭窄水域航行时，海豚1——数字孪生船岸镜像智能感知系统能够准确识别障碍物和目标，是船舶航行过程中防止碰撞的关键。
+3. 不良照明环境航行：在雾天、雨天等不良照明环境下，海豚1——数字孪生船岸镜像智能感知系统的图像增强系统可确保视线清晰，减少事故发生。
+4. 协助海上作业：海豚1——数字孪生船岸镜像智能感知系统的预警数据可协助进行各类海上作业，如渔业、海洋科研和资源勘探等。
 
-# Multiple Themes
-![PyDracula_Default_Dark](https://user-images.githubusercontent.com/60605512/112993874-0b647700-9140-11eb-8670-61322d70dbe3.png)
-![PyDracula_Light](https://user-images.githubusercontent.com/60605512/112993918-18816600-9140-11eb-837c-e7a7c3d2b05e.png)
+## 数据来源
 
-# High DPI
-> Qt Widgets is an old technology and does not have a good support for high DPI settings, making these images look distorted when your system has DPI applied above 100%.
-You can minimize this problem using a workaround by applying this code below in "main.py" just below the import of the Qt modules.
-```python
-# ADJUST QT FONT DPI FOR HIGHT SCALE
-# ///////////////////////////////////////////////////////////////
-from modules import *
-from widgets import *
-os.environ["QT_FONT_DPI"] = "96"
-```
+本项目主要使用其搭载的前后左右4个摄像头，以及船上的机载电脑等硬件设备进行数据采集。
 
-# Running
-> Inside your preferred terminal run the commands below depending on your system, remembering before installing Python 3.9> and PySide6 "pip install PySide6".
-> ## **Windows**:
-```console
-python main.py
-```
-> ## **MacOS and Linux**:
-```console
-python3 main.py
-```
-# Compiling
-> ## **Windows**:
-```console
-python setup.py build
-```
+![image](readme/2.png)
 
-# Project Files And Folders
-> **main.py**: application initialization file.
+摄像机分别部署朝向船舶的四个方向，进行图像拍摄。该单目摄像机选取专业顶尖芯片方案，采用全新半导体散热技术，稳定传感器温度，保证图像输出质量。分辨率可达3200万像素（8160 x 3616），并在此分辨率下可输出30fps实时图像。
 
-> **main.ui**: Qt Designer project.
+![image](readme/3.png)
 
-> **resouces.qrc**: Qt Designer resoucers, add here your resources using Qt Designer. Use version 6 >
+## iSea 感知系统界面介绍
+iSea包含：目标分割、数据增强、船体俯视图、仪表性能图四个功能，每个功能对应一个单独的界面
 
-> **setup.py**: cx-Freeze setup to compile your application (configured for Windows).
+![image](readme/4.png)
 
-> **themes/**: add here your themes (.qss).
+在iSea的分割功能界面实时可视化“海豚1”号的四个摄像头画面并可选择运行我们训练好的目标分割模型，在右侧区域显示“海豚1”的位置及实时天气，输出结果，并可实时可视化结果如图3.8所示。
 
-> **modules/**: module for running PyDracula GUI.
+![image](readme/5.png)
 
-> **modules/app_funtions.py**: add your application's functions here.
-Up
-> **modules/app_settings.py**: global variables to configure user interface.
+在数据增强功能区可以对不良天气下采集到的数据进行数据增强，同时可以一键展示不同增强算法的结果图。UI支持选择不同算法模型并可动态修改算法参数，保存结果图片。
 
-> **modules/resources_rc.py**: "resource.qrc" file compiled for python using the command: ```pyside6-rcc resources.qrc -o resources_rc.py```.
+![image](readme/6.png)
 
-> **modules/ui_functions.py**: add here only functions related to the user interface / GUI.
+俯视功能区可实时展示“海豚1”上帝视角俯视船舶周围的情景，将摄像头检测到的障碍物、船、岸等危险物进行可视化，并在右下角统计危险预警情况。在左部显示船上主机运行性能参数，仪表盘功能区。
 
-> **modules/ui_main.py**: file related to the user interface exported by Qt Designer. You can compile it manually using the command: ```pyside6-uic main.ui> ui_main.py ```.
-After expoting in .py and change the line "import resources_rc" to "from. Resoucers_rc import *" to use as a module.
+![image](readme/7.jpg)
 
-> **images/**: put all your images and icons here before converting to Python (resources_re.py) ```pyside6-rcc resources.qrc -o resources_rc.py```.
+仪表盘工作页则可以显示主机工作时的事实状态，方便对其实时进行健康管理。
 
-# Projects Created Using PyDracula
-**See the projects that were created using PyDracula.**
-> To participate create a "Issue" with the name beginning with "#pydracula_project", leaving the link of your project on Github, name of the creator and what is its functionality. Your project will be added and this list will be deleted from "Issue".
-**Malicious programs will not be added**!
+## 版权声明
 
-
-
+使用该代码进行二次开发时请注明来源，谢谢
